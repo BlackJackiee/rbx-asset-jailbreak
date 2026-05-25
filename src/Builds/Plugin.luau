@@ -2,6 +2,7 @@ local InsertService = game:GetService("InsertService") :: InsertService
 
 local pluginRoot = script:FindFirstAncestor("PluginRoot")
 local Jailbreak = require(pluginRoot.Main.Jailbreak)
+local Ui = require(pluginRoot.Main.Ui)
 
 local Plugin = {}
 
@@ -18,6 +19,8 @@ function Plugin.build(plugin: Plugin)
 		-- which means we can't make http requests
 		return binding:Invoke(...)
 	end
+
+	Ui.build(plugin, Jailbreak.try)
 
 	plugin.Unloading:Connect(function()
 		binding:Destroy()

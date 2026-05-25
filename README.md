@@ -25,5 +25,15 @@ The first is a plugin component which does some sanity checks / probing and then
 1. Download the repository and install the toolchain via [rokit.](https://github.com/rojo-rbx/rokit) i.e run `rokit install`
 2. Run `lune run wally-install`
 3. Run `rojo build plugin.project.json --output plugin.rbxm` and place the resulting rbxm in your local plugins folder then make sure you restart studio.
-4. Run `lune run serve`
-5. In studio you can now call `_G.jailbreak(link: string | number)` in the command line.
+4. Run `lune run serve` (keep this terminal open while using the plugin)
+5. In studio, enable HTTP requests under Game Settings → Security → "Allow HTTP Requests".
+6. You can now use the tool in either of two ways:
+    - Open the **Asset Jailbreak** panel from the Plugins toolbar — paste an asset ID or `roblox.com` URL into the input and click Run. The panel doubles as a built-in cheat sheet and surfaces inline error messages for the common failure modes (lune server not running, HTTP disabled, unparseable input, unsupported asset type).
+    - Or call `_G.jailbreak(link: string | number)` from the command bar, same as before.
+
+## Fork notes
+
+This is a personal fork of [EgoMoose/rbx-asset-jailbreak](https://github.com/EgoMoose/rbx-asset-jailbreak). Changes on top of upstream:
+
+- Added a dockable **Asset Jailbreak** plugin panel (toolbar button → input box + Run button + how-to text + color-coded status area). Source: [`src/Main/Ui.luau`](src/Main/Ui.luau).
+- Wired the panel into the plugin entry point ([`src/Builds/Plugin.luau`](src/Builds/Plugin.luau)) — the original `_G.jailbreak` command-bar entry still works unchanged.
